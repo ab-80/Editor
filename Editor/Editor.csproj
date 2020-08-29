@@ -52,6 +52,7 @@
     <Compile Include="EditorPage.Designer.cs">
       <DependentUpon>EditorPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interpreter.cs" />
     <Compile Include="WarningForm.cs">
       <SubType>Form</SubType>
     </Compile>

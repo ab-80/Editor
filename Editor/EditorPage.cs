@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Editor
 {
@@ -29,18 +31,18 @@ namespace Editor
             DialogResult result = warning.ShowDialog();
 
             //uses the WarningForm to confirm that the user wants to start a new page
-            if(warning.returnValue == 1)
+            if (warning.returnValue == 1)
             {
                 richTextBox1.Clear();
             }
-            
+
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Open File";
-            if(ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Clear();
 
@@ -59,7 +61,7 @@ namespace Editor
 
             if (fileToBeSaved.ShowDialog() == DialogResult.OK)
             {
-                using(StreamWriter sw = new StreamWriter(fileToBeSaved.FileName))
+                using (StreamWriter sw = new StreamWriter(fileToBeSaved.FileName))
                 {
                     sw.Write(richTextBox1.Text);
                     sw.Close();
@@ -85,7 +87,7 @@ namespace Editor
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void toolStripUndo_Click(object sender, EventArgs e)
@@ -174,6 +176,38 @@ namespace Editor
         private void selectAllLabel_Click(object sender, EventArgs e)
         {
             richTextBox1.SelectAll();
+
+        }
+
+        private void toolStripRun_Click(object sender, EventArgs e)
+        {
+            /*
+            outputBox.Items.Clear();
+            Interpreter interpreter = new Interpreter();
+            ArrayList outputList = new ArrayList();
+            outputList = interpreter.Run(richTextBox1.Text);
+            for(int i = 0; i < outputList.Count; i++)
+            {
+                outputBox.Items.Add(i);
+            }
+            */
+
+            
+        }
+
+        private void toolStripSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fileToBeSaved = new SaveFileDialog();
+            fileToBeSaved.Title = "Save File";
+
+            if (fileToBeSaved.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter sw = new StreamWriter(fileToBeSaved.FileName))
+                {
+                    sw.Write(richTextBox1.Text);
+                    sw.Close();
+                }
+            }
         }
     }
 }
